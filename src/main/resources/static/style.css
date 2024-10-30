@@ -1,0 +1,211 @@
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(45deg, #8e2de2, #4a00e0);
+  /* Purple to dark purple gradient */
+  color: #FFFFFF;
+  /* White text color */
+  animation: fade-in 2s ease-in-out;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+b {
+  color: #FFFFFF;
+  /* White text color */
+}
+
+hr {
+  border: 1px solid #B0E0E6;
+  /* Light blue border */
+  margin: 20px 0;
+}
+
+/* Link Styles */
+a {
+  text-decoration: none;
+  color: #FFFFFF;
+  /* White link color */
+  transition: color 0.3s ease, transform 0.3s ease;
+  /* Added transform */
+}
+
+a:hover {
+  color: #ADD8E6;
+  /* Lighter blue hover color */
+  transform: scale(1.05);
+  /* Slight scale effect on hover */
+}
+
+/* Button Styles */
+button,
+input[type="submit"] {
+  background-color: #8e2de2;
+  /* Purple button background */
+  color: #FFFFFF;
+  /* White text color */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Added transform */
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #4a00e0;
+  /* Darker purple on hover */
+  transform: scale(1.05);
+  /* Scale effect on hover */
+}
+
+/* Logo Styles */
+.logo {
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease-in-out;
+  margin: 20px auto;
+  display: block;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  /* Minimalistic scale effect */
+}
+
+/* Chef Image Styles */
+.chef-image {
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 2px solid #FFFFFF;
+  /* White border */
+  display: block;
+  margin: 20px auto;
+}
+
+/* Table Styles */
+.table-container {
+  margin: 20px 0;
+  overflow-x: auto;
+  /* Allows horizontal scrolling */
+}
+
+.info-table,
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #B0E0E6;
+  /* Light blue border */
+  animation: fade-in 1s ease-in-out;
+}
+
+.info-table th,
+.menu-table th,
+.info-table td,
+.menu-table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #B0E0E6;
+  /* Light blue border */
+}
+
+/* .info-table th, .menu-table th {
+  background-color: #8e2de2; 
+  color: #FFFFFF; 
+} */
+
+/* Menu List Styles */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li {
+  padding: 15px;
+  border-bottom: 1px solid #B0E0E6;
+  /* Light blue border */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Added transform */
+}
+
+.menu-list li:last-child {
+  border-bottom: none;
+}
+
+.menu-list li:hover {
+  background-color: #8e2de2;
+  /* Purple background on hover */
+  cursor: pointer;
+  transform: scale(1.02);
+  /* Slight scale effect on hover */
+}
+
+/* Animations */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+  .chef-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .menu-table {
+    font-size: 14px;
+  }
+}
+
+/* Menu Table Styles */
+.menu-table {
+  transition: transform 0.3s ease;
+  /* Transition for hover effect */
+}
+
+.menu-table th,
+.menu-table td {
+  border: 1px solid #ddd;
+  /* Light grey border */
+  padding: 8px;
+  /* Padding inside cells */
+  text-align: left;
+  /* Left align text */
+  transition: background-color 0.3s ease;
+  /* Smooth background color transition */
+}
+
+/* Soup Image Styles */
+.soup-image {
+  width: 100px;
+  /* Fixed width for the images */
+  height: 100px;
+  /* Fixed height for the images to maintain uniformity */
+  object-fit: cover;
+  /* Ensures the image covers the area without distortion */
+  transition: transform 0.2s;
+  /* Smooth image scaling */
+}
+
+.menu-table tr:hover img {
+  transform: scale(1.1);
+  /* Slightly scale up the image on hover */
+}

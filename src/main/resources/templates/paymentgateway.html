@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payment Gateway Integration</title>
+
+    <link rel="icon" href="images/dollar.png" type="image/png" sizes="16x16">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ffcc33, #ff6699);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2,
+        h3,
+        h4,
+        h5 {
+            color: #fff;
+            text-align: center;
+        }
+
+        .pay-tabs {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 50px auto;
+            width: 80%;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .resp-tabs-list {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .resp-tabs-list li {
+            background: #ff6699;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .resp-tabs-list li:hover {
+            background: #ff3366;
+        }
+
+        .resp-tab-content {
+            display: none;
+        }
+
+        .resp-tab-content-active {
+            display: block;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .confirm-btn {
+            display: block;
+            background: #ffcc33;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 20px auto;
+            width: 100px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .confirm-btn:hover {
+            background: #ff9933;
+        }
+
+        .tab-for input {
+            background: #fff;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .tab-for ul {
+            display: flex;
+            gap: 15px;
+        }
+
+        .tab-for ul li input {
+            width: 50px;
+        }
+
+        .radio-btns .check_box {
+            background: #ff6699;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .radio-btns .radio label {
+            color: white;
+        }
+
+        .user-grids {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .user-left,
+        .user-right {
+            width: 48%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pay-tabs">
+        <h2>Select Payment Method</h2>
+        <ul class="resp-tabs-list">
+            <li class="resp-tab-item" aria-controls="tab_item-0">Credit Card</li>
+            <li class="resp-tab-item" aria-controls="tab_item-1">Net Banking</li>
+            <li class="resp-tab-item" aria-controls="tab_item-2">PayPal</li>
+            <li class="resp-tab-item" aria-controls="tab_item-3">Debit Card</li>
+        </ul>
+
+        <div class="resp-tabs-container">
+            <div class="tab-1 resp-tab-content resp-tab-content-active" aria-labelledby="tab_item-0">
+                <h3>Credit Card Info</h3>
+                <form>
+                    <div class="tab-for">
+                        <h5>Amount</h5>
+                        <input type="text" value="₹.00" required>
+                    </div>
+                    <div class="tab-for">
+                        <h5>NAME ON CARD</h5>
+                        <input type="text" value="Enter the name" required>
+                        <h5>CARD NUMBER</h5>
+                        <input type="text" value="0000-0000-0000-0000" required>
+                    </div>
+                    <div class="transaction">
+                        <div class="tab-form-left">
+                            <h5>EXPIRATION DATE</h5>
+                            <ul>
+                                <li><input type="number" value="0" min="1" required></li>
+                                <li><input type="number" value="2024" required></li>
+                            </ul>
+                        </div>
+                        <div class="tab-form-right">
+                            <h5>CVV NUMBER</h5>
+                            <input type="password" value="xxx" required>
+                        </div>
+                    </div>
+                    <a class="confirm-btn" href="successPage.html">SEND</a>
+                </form>
+            </div>
+
+            <!-- Net Banking, PayPal, and Debit Card sections omitted for brevity, structure similar to Credit Card -->
+        </div>
+    </div>
+
+</body>
+
+</html>

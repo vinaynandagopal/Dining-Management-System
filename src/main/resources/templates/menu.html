@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        header {
+            display: flex;
+            flex-direction: row;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 50px;
+            font-size: 36px;
+            text-transform: uppercase;
+        }
+
+        .menu-link {
+            display: block;
+            text-decoration: none;
+            margin: 20px auto;
+            max-width: 300px;
+        }
+
+        h2 {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        h2:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            margin: 40px auto;
+            width: 60%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #5f0ca7;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MENU:</h1>
+    <header>
+        <a href="/soups" class="menu-link">
+            <h2><b>SOUPS</b></h2>
+        </a>
+
+        <a href="/appetizers" class="menu-link">
+            <h2><b>APPETIZERS</b></h2>
+        </a>
+        <a href="/maincourse" class="menu-link">
+            <h2><b>MAIN COURSE</b></h2>
+        </a>
+        <a href="/desserts" class="menu-link">
+            <h2><b>DESSERTS</b></h2>
+        </a>
+
+        <a href="/drinks" class="menu-link">
+            <h2><b>DRINKS</b></h2>
+        </a>
+    </header>
+    <table class="menu-table">
+        <tr>
+            <th>
+                Dish Name
+            </th>
+            <th>
+                Dish price
+            </th>
+            <th>
+                Dish image
+            </th>
+        <tr th:each="dish: ${dishes}">
+            <td th:text="${dish.dish_name}" />
+            <td th:text="${dish.price}" />
+            <td><img th:src="${dish.dish_image_url}" style="object-fit: contain; height:100px" /></td>
+            <td><button th:onclick="decrementOrder([[${dish.dish_name}]])">-</button>
+                <span id="-quantity" th:attrprepend="id=${dish.dish_name}">0</span>
+                <button th:onclick="incrementOrder([[${dish.dish_name}]])">+</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <button onclick="submitOrder()"
+        style="background-color: #007BFF; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        Submit
+
+
+    </button>
+
+
+
+
+
+    <script>
+        // Load orders from localStorage on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            loadOrders();
+        });
+
+        // Function to increment the order quantity
+        function incrementOrder(dishName) {
+            let orders = JSON.parse(localStorage.getItem("orders")) || {};
+            orders[dishName] = (orders[dishName] || 0) + 1;
+            localStorage.setItem("orders", JSON.stringify(orders));
+            updateDisplay(dishName);
+        }
+
+        // Function to decrement the order quantity
+        function decrementOrder(dishName) {
+            let orders = JSON.parse(localStorage.getItem("orders")) || {};
+            if (orders[dishName] > 0) {
+                orders[dishName] -= 1;
+            }
+            localStorage.setItem("orders", JSON.stringify(orders));
+            updateDisplay(dishName);
+        }
+
+        // Function to update the displayed quantity
+        function updateDisplay(dishName) {
+            const orders = JSON.parse(localStorage.getItem("orders"))
+            const quantity = orders[dishName] || 0;
+            document.getElementById(`${dishName}-quantity`).innerText = quantity;
+
+        }
+
+        // Function to load orders from localStorage and display them
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem("orders")) || {};
+            for (const [dishName, quantity] of Object.entries(orders)) {
+                try {
+                    document.getElementById(`${dishName}-quantity`).innerText = quantity;
+                }
+                catch (error) {
+
+                }
+
+
+            }
+
+        }
+
+        loadOrders();
+
+        function submitOrder() {
+            fetch('/placeOrder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: localStorage.getItem("orders")
+            })
+                .then(response => response.json())
+                //responses of pattern {'orderID':1234}
+                .then(data => (data['orderID']))
+                .then(orderID => window.location = `/viewOrder/${orderID}`)
+                .catch(error => console.error('Error:', error));
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

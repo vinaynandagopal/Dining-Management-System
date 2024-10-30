@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 50px;
+            font-size: 36px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            color: #555;
+            font-size: 18px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .order-table {
+            margin: 40px auto;
+            width: 80%;
+            border-collapse: collapse;
+            background-color: #333;
+        }
+
+        .order-table th,
+        .order-table td {
+            padding: 15px;
+            color: white;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .order-table tr:hover {
+            background-color: #5f0ca7;
+        }
+
+        .total h2 {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .total h2:hover {
+            background-color: #0056b3;
+        }
+
+        .confirm-button button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .confirm-button button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Your Order</h1>
+            <p>Review your items below</p>
+        </header>
+
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Dish</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each ordered dish -->
+                <tr th:each="item : ${orderItems}">
+                    <td th:text="${item.dishName}">Dish Name</td>
+                    <td th:text="${item.price}">Dish Price</td>
+                    <td th:text="${item.quantity}">Dish Quantity</td>
+                    <!-- Calculate subtotal for each item -->
+                    <td th:text="${item.price * item.quantity}">Subtotal</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="total">
+            <h2>Total:</h2>
+            <p
+                th:text="${#numbers.formatDecimal(orderItems.stream().mapToDouble(i -> i.price * i.quantity).sum(), 0, 2)}">
+                Total Amount</p>
+        </div>
+
+        <div class="confirm-button">
+            <button onclick="confirmOrder()">Confirm Order</button>
+        </div>
+    </div>
+    <p>
+        <a href="/logout"
+            style="background-color: #087cff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;"
+            onmouseover="this.style.backgroundColor='#005bb5'" onmouseout="this.style.backgroundColor='#087cff'">
+            <b>LOGOUT</b>
+        </a>
+    </p>
+
+    <script>
+        // Confirm order function (placeholder)
+        function confirmOrder() {
+            alert("Order confirmed! Thank you.");
+        }
+    </script>
+</body>
+
+</html>
