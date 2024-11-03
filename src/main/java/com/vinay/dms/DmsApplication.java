@@ -2,7 +2,6 @@ package com.vinay.dms;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -147,6 +145,7 @@ public class DmsApplication {
 		return menupage(session, model, "Drink");
 	}
 
+	@SuppressWarnings("unchecked")
 	@GetMapping("/viewOrder/{orderID}")
 	public String viewOrder(@PathVariable("orderID") String orderID, Model model)
 			throws SQLException, JsonMappingException, JsonProcessingException {

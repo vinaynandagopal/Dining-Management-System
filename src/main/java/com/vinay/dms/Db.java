@@ -287,6 +287,7 @@ public class Db {
         return orderString;
     }
 
+    @SuppressWarnings("unused")
     public static List<Dish> getDishesByNames(List<String> dishNames) throws SQLException {
         List<Dish> dishes = new ArrayList<>();
         Connection con = getConnection();
