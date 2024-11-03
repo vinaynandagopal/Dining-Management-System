@@ -99,8 +99,8 @@
             </thead>
             <tbody>
                 <!-- Loop through each ordered dish -->
-                <tr th:each="item : ${orderItems}">
-                    <td th:text="${item.dishName}">Dish Name</td>
+                <tr th:each="item : ${orders}">
+                    <td th:text="${item.dish_name}">Dish Name</td>
                     <td th:text="${item.price}">Dish Price</td>
                     <td th:text="${item.quantity}">Dish Quantity</td>
                     <!-- Calculate subtotal for each item -->
@@ -112,7 +112,7 @@
         <div class="total">
             <h2>Total:</h2>
             <p
-                th:text="${#numbers.formatDecimal(orderItems.stream().mapToDouble(i -> i.price * i.quantity).sum(), 0, 2)}">
+                th:text="${total_amount}">
                 Total Amount</p>
         </div>
 
@@ -131,7 +131,10 @@
     <script>
         // Confirm order function (placeholder)
         function confirmOrder() {
-            alert("Order confirmed! Thank you.");
+            alert("Order confirmed! Thank you. Your Order ID is: [[${orderID}]]. You will now be redirected to the payment page");
+            localStorage.removeItem("orders");
+            window.location.href = "/paymentgateway";
+            
         }
     </script>
 </body>

@@ -1,239 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register-DMS</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <title>Register - DMS</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-        :root {
-            --white: #fff;
-            --text-clr: #000024;
-            --primary: #3e2093;
-            --secondary: #c0c1d2;
-            --input-bg: #f1f1ff;
-            --btn-hvr: #1a0065;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 
         * {
             margin: 0;
+            border: 0;
             padding: 0;
             box-sizing: border-box;
-            outline: none;
-            font-family: 'Open Sans', sans-serif;
+            font-family: "Poppins", sans-serif;
         }
 
         body {
-            background: var(--primary);
-            font-size: 14px;
-            color: var(--text-clr);
-        }
-
-        .wrapper {
-            width: 100%;
-            padding: 0 10px;
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .r_form_wrap {
-            width: 500px;
-            max-width: 100%;
-        }
-
-        .r_form_wrap .title {
-            padding: 25px;
-            background: var(--white);
-            border-radius: 3px;
-            margin-bottom: 20px;
-        }
-
-        .r_form_wrap .title p {
-            font-size: 25px;
-            text-align: center;
-        }
-
-        .r_form {
-            padding: 40px;
-            border-radius: 3px;
-            background: var(--white);
-        }
-
-        .r_form .input_wrap {
-            width: 100%;
-            margin-bottom: 25px;
-        }
-
-        .r_form .input_wrap label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .r_form .input_wrap .input_item {
-            position: relative;
-            width: 100%;
-        }
-
-        .r_form .input_wrap .input_item .input {
-            width: 100%;
-            border-radius: 3px;
-            height: 40px;
-            border: 2px solid var(--input-bg);
-            background: var(--input-bg);
-            padding: 10px 20px;
-            padding-left: 50px;
-            transition: 0.5s ease;
-            color: var(--secondary);
-        }
-
-        .r_form .input_wrap .input_item .input:focus {
-            border-color: var(--primary);
-        }
-
-        .r_form .input_wrap .input_item .icon {
-            position: absolute;
-            top: 12px;
-            left: 20px;
-            color: var(--secondary);
-            font-size: 16px;
-        }
-
-        .r_form .input_wrap .input_radio {
-            display: flex;
-        }
-
-        .r_form .input_wrap .input_radio .input_radio_item {
-            background: var(--input-bg);
-            margin-right: 25px;
-            padding: 20px;
-            border-radius: 3px;
-            position: relative;
-            width: 100px;
-        }
-
-        .r_form .input_wrap .input_radio .input_radio_item .radio_mark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            background: linear-gradient(45deg, #8e2de2, #4a00e0);
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            min-width: 100vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--secondary);
-            border: 2px solid transparent;
-            border-radius: 3px;
-            margin: 0;
-            cursor: pointer;
-            transition: 0.5s ease;
         }
 
-        .r_form .input_wrap .input_radio .input_radio_item .radio_mark .i {
-            margin-right: 5px;
-            display: inline-block;
+        main.container {
+            background: white;
+            min-width: 320px;
+            min-height: 60vh;
+            padding: 2rem;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
         }
 
-        .r_form .input_wrap .input_radio .input_radio_item .radio {
+        main h2 {
+            font-weight: 600;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        main h2::before {
+            content: '';
             position: absolute;
-            top: 0;
+            height: 4px;
+            width: 25px;
+            bottom: 3px;
             left: 0;
-            opacity: 0;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #8e2de2, #4a00e0);
         }
 
-        .r_form .input_wrap .input_radio .input_radio_item .radio:checked~.radio_mark {
-            color: var(--primary);
-            border-color: var(--primary);
+        form {
+            display: flex;
+            flex-direction: column;
         }
 
-        button {
+        .input-field {
+            position: relative;
+        }
+
+        form .input-field:not(:last-child) {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-field .underline::before {
+            content: '';
+            position: absolute;
+            height: 1px;
             width: 100%;
-            border: 0;
-            background: var(--primary);
-            padding: 10px;
-            border-radius: 3px;
-            height: 40px;
-            color: var(--white);
-            cursor: pointer;
-            transition: 0.5s ease;
+            bottom: -5px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.2);
         }
 
-        button:hover {
-            background: var(--btn-hvr);
+        .input-field .underline::after {
+            content: '';
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #8e2de2, #4a00e0);
+            transform: scaleX(0);
+            transition: all .3s ease-in-out;
+            transform-origin: left;
+        }
+
+        .input-field input:focus ~ .underline::after {
+            transform: scaleX(1);
+        }
+
+        .input-field input {
+            outline: none;
+            font-size: 0.9rem;
+            color: rgba(0, 0, 0, 0.7);
+            width: 100%;
+        }
+
+        .input-field input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        form input[type="submit"] {
+            margin-top: 2rem;
+            padding: 0.4rem;
+            width: 100%;
+            background: linear-gradient(to left, #4776E6, #8e54e9);
+            cursor: pointer;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 300;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        form input[type="submit"]:hover {
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #4776E6, #8e54e9);
+        }
+
+        /* Styling for Login link */
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .login-link p {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .login-link a button {
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            background: linear-gradient(to right, #4776E6, #8e54e9);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-link a button:hover {
+            background: linear-gradient(to left, #4776E6, #8e54e9);
         }
     </style>
 </head>
-
 <body>
-
-    <div class="wrapper">
-        <div class="r_form_wrap">
-
-            <div class="title">
-                <p>Registration Form</p>
+    <main class="container">
+        <h2>Register</h2>
+        <form method="post" action="/register">
+            <div class="input-field">
+                <input type="text" name="name" id="name" placeholder="Full Name" required>
+                <div class="underline"></div>
             </div>
-
-            <div class="r_form">
-                <form method="post" action="/register">
-                    <div class="input_wrap">
-                        <label for="name">NAME</label>
-                        <div class="input_item">
-                            <span class="icon">
-                                <ion-icon name="person-sharp"></ion-icon>
-                            </span>
-                            <input type="text" name="name" class="input" id="name">
-                        </div>
-                    </div>
-                    <div class="input_wrap">
-                        <label for="email">Email</label>
-                        <div class="input_item">
-                            <span class="icon">
-                                <ion-icon name="mail-sharp"></ion-icon>
-                            </span>
-                            <input type="email" name="email" class="input" id="email">
-                        </div>
-                    </div>
-                    <div class="input_wrap">
-                        <label for="password">Password</label>
-                        <div class="input_item">
-                            <span class="icon">
-                                <ion-icon name="key-sharp"></ion-icon>
-                            </span>
-                            <input type="password" name="password" class="input" id="password">
-                        </div>
-                    </div>
-                    <div class="input_wrap">
-                        <label for="phone">Phone</label>
-                        <div class="input_item">
-                            <span class="icon">
-                                <ion-icon name="call-sharp"></ion-icon>
-                            </span>
-                            <input type="text" name="phone" class="input" id="phone">
-                        </div>
-                    </div>
-                    <div class="input_wrap">
-                        <label for="address">Address</label>
-                        <div class="input_item">
-                            <span class="icon">
-                                <ion-icon name="location-sharp"></ion-icon>
-                            </span>
-                            <input type="text" name="address" class="input" id="address">
-                        </div>
-                    </div>
-
-                    <div class="input_wrap">
-                        <button type="submit">Register Now</button>
-                    </div>
-                </form>
+            <div class="input-field">
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <div class="underline"></div>
             </div>
+            <div class="input-field">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <div class="underline"></div>
+            </div>
+            <div class="input-field">
+                <input type="text" name="phone" id="phone" placeholder="Phone Number" required>
+                <div class="underline"></div>
+            </div>
+            <div class="input-field">
+                <input type="text" name="address" id="address" placeholder="Address" required>
+                <div class="underline"></div>
+            </div>
+            <input type="submit" value="Register">
+        </form>
 
+        <!-- Login link to navigate to login page -->
+        <div class="login-link">
+            <p>Already have an account?</p>
+            <a href="/login"><button>Login</button></a>
         </div>
-    </div>
-
+    </main>
 </body>
-
 </html>

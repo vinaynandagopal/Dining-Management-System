@@ -2,6 +2,8 @@ package com.vinay.dms;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class Models {
 
 }
@@ -73,11 +75,42 @@ class Dish implements Serializable {
         this.non_veg = non_veg;
         this.dish_type = dish_type;
     }
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+class DishInOrder implements Serializable {
+    public String dish_name;
+    public float price;
+    public int quantity;
+
+    // Getters and setters (optional, but good practice)
+    public String getDishName() {
+        return dish_name;
+    }
+
+    public void setDishName(String dish_name) {
+        this.dish_name = dish_name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public String toString() {
         return String.format("%s-%f", this.dish_name, this.price);
     }
-
 }
 
 class Category {

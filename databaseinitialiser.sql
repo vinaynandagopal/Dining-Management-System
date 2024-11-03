@@ -1,9 +1,9 @@
 create database if not exists japaneserestaurantdelivery;
 use japaneserestaurantdelivery;
 create table if not exists users (
-	user_id varchar(36) primary key NOT NULL,
+   email varchar(50) primary key NOT NULL,
+	user_id varchar(36)NOT NULL,
     name varchar(20) NOT NULL,
-    email varchar(50) NOT NULL,
     password_hash varchar(64) NOT NULL,
     phone varchar(10),
     user_type int,
@@ -16,15 +16,12 @@ CREATE TABLE if not exists Restaurants (
     phone VARCHAR(10)
 );
 
-CREATE TABLE if not exists Orders (
+CREATE TABLE if not exists orders (
     order_id varchar(36) PRIMARY KEY,
     user_id varchar(36),
-    restaurant_id varchar(36),
-    total_amount float,
-    order_item VARCHAR(20),
-    delivery_id varchar(36),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id) ON DELETE CASCADE
+    order_string TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(email) ON DELETE CASCADE
+    
 );
 
 create table if not exists restaurant_menu(

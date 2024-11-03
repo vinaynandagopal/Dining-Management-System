@@ -209,3 +209,29 @@ input[type="submit"]:hover {
   transform: scale(1.1);
   /* Slightly scale up the image on hover */
 }
+
+body {
+  text-align: center;
+}
+
+.center-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-button {
+  background-color: #007bff; /* Button background color as per the uploaded image */
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Hover effect to enhance button visibility */
+.menu-button:hover {
+  background-color: #0056b3;
+}

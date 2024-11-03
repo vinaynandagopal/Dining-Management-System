@@ -1,262 +1,192 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Login-DMS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DMS</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 
         * {
-
             margin: 0;
-
             border: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
             font-family: "Poppins", sans-serif;
-
         }
-
 
         body {
-
             background: linear-gradient(45deg, #8e2de2, #4a00e0);
-
             background-repeat: no-repeat;
-
             min-height: 100vh;
-
             min-width: 100vw;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
         }
-
 
         main.container {
-
             background: white;
-
             min-width: 320px;
-
-            min-height: 40vh;
-
+            min-height: 50vh;
             padding: 2rem;
-
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-
             border-radius: 8px;
-
         }
-
 
         main h2 {
-
             font-weight: 600;
-
             margin-bottom: 2rem;
-
             position: relative;
-
         }
-
 
         main h2::before {
-
             content: '';
-
             position: absolute;
-
             height: 4px;
-
             width: 25px;
-
             bottom: 3px;
-
             left: 0;
-
             border-radius: 8px;
-
             background: linear-gradient(45deg, #8e2de2, #4a00e0);
-
         }
-
 
         form {
-
             display: flex;
-
             flex-direction: column;
-
         }
-
 
         .input-field {
-
             position: relative;
-
         }
-
 
         form .input-field:first-child {
-
             margin-bottom: 1.5rem;
-
         }
-
 
         .input-field .underline::before {
-
             content: '';
-
             position: absolute;
-
             height: 1px;
-
             width: 100%;
-
             bottom: -5px;
-
             left: 0;
-
             background: rgba(0, 0, 0, 0.2);
-
         }
-
 
         .input-field .underline::after {
-
             content: '';
-
             position: absolute;
-
             height: 1px;
-
             width: 100%;
-
             bottom: -5px;
-
             left: 0;
-
             background: linear-gradient(45deg, #8e2de2, #4a00e0);
-
             transform: scaleX(0);
-
             transition: all .3s ease-in-out;
-
             transform-origin: left;
-
         }
-
 
         .input-field input:focus~.underline::after {
-
             transform: scaleX(1);
-
         }
-
 
         .input-field input {
-
             outline: none;
-
             font-size: 0.9rem;
-
             color: rgba(0, 0, 0, 0.7);
-
             width: 100%;
-
         }
-
 
         .input-field input::placeholder {
-
             color: rgba(0, 0, 0, 0.5);
-
         }
-
 
         form input[type="submit"] {
-
             margin-top: 2rem;
-
             padding: 0.4rem;
-
             width: 100%;
-
             background: linear-gradient(to left, #4776E6, #8e54e9);
-
             cursor: pointer;
-
             color: white;
-
             font-size: 0.9rem;
-
             font-weight: 300;
-
             border-radius: 4px;
-
             transition: all 0.3s ease;
-
         }
-
 
         form input[type="submit"]:hover {
-
             letter-spacing: 0.5px;
-
             background: linear-gradient(to right, #4776E6, #8e54e9);
-
         }
-
 
         .forgot-password {
-
             margin: 10px 0;
-
             text-align: right;
-
         }
-
 
         .forgot-password a {
-
             color: #3498db;
-
             text-decoration: none;
-
             font-size: 0.9rem;
-
         }
-
 
         .forgot-password a:hover {
-
             text-decoration: underline;
+        }
 
+        /* Styling for Register link */
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .register-link p {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .register-link a button {
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            background: linear-gradient(to right, #4776E6, #8e54e9);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .register-link a button:hover {
+            background: linear-gradient(to left, #4776E6, #8e54e9);
         }
     </style>
-
 </head>
 
 <body>
     <main class="container">
         <h2>Login</h2>
         <form method="post" action="/login">
-            <div class="input-field"> <input type="email" id="email" name="email" placeholder="Email">
+            <div class="input-field">
+                <input type="email" name="email" id="email" placeholder="Email" required>
                 <div class="underline"></div>
             </div>
-            <div class="input-field"> <input type="password" id="password" name="password" placeholder="Password">
+            <div class="input-field">
+                <input type="password" name="password" id="password" placeholder="Password" required>
                 <div class="underline"></div>
             </div>
-            <div class="forgot-password"> <a href="#">Forgot Password?</a> </div> <input type="submit" value="Login">
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <input type="submit" value="Login">
         </form>
+
+        <!-- Register link to navigate to register page -->
+        <div class="register-link">
+            <p>Don’t have an account?</p>
+            <a href="/register"><button>Register</button></a>
+        </div>
     </main>
 </body>
 

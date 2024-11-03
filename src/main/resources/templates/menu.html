@@ -103,7 +103,7 @@
             <td><img th:src="${dish.dish_image_url}" style="object-fit: contain; height:100px" /></td>
             <td><button th:onclick="decrementOrder([[${dish.dish_name}]])">-</button>
                 <span id="-quantity" th:attrprepend="id=${dish.dish_name}">0</span>
-                <button th:onclick="incrementOrder([[${dish.dish_name}]])">+</button>
+                <button th:onclick="incrementOrder([[${dish.dish_name}]] , [[${dish.price}]])">+</button>
             </td>
         </tr>
 
@@ -127,19 +127,34 @@
         });
 
         // Function to increment the order quantity
-        function incrementOrder(dishName) {
+        function incrementOrder(dishName, price) {
             let orders = JSON.parse(localStorage.getItem("orders")) || {};
-            orders[dishName] = (orders[dishName] || 0) + 1;
+            dish = orders[dishName] || {};
+            dish["quantity"] = (dish["quantity"] || 0) + 1;
+            dish["price"] = price;
+            orders[dishName] = dish;
             localStorage.setItem("orders", JSON.stringify(orders));
+
             updateDisplay(dishName);
+
         }
 
         // Function to decrement the order quantity
         function decrementOrder(dishName) {
             let orders = JSON.parse(localStorage.getItem("orders")) || {};
-            if (orders[dishName] > 0) {
-                orders[dishName] -= 1;
+            if (!(dishName in orders)) {
+                return;
             }
+            dish = orders[dishName] || {};
+
+            if (dish["quantity"] > 0) {
+                dish["quantity"] -= 1;
+                orders[dishName] = dish;
+            }
+            if (dish["quantity"] == 0) {
+                delete orders[dishName];
+            }
+
             localStorage.setItem("orders", JSON.stringify(orders));
             updateDisplay(dishName);
         }
@@ -147,7 +162,12 @@
         // Function to update the displayed quantity
         function updateDisplay(dishName) {
             const orders = JSON.parse(localStorage.getItem("orders"))
-            const quantity = orders[dishName] || 0;
+            var quantity;
+            if(!(dishName in orders)){
+                quantity = 0
+            } else {
+                quantity = orders[dishName]["quantity"] || 0;
+            }
             document.getElementById(`${dishName}-quantity`).innerText = quantity;
 
         }
@@ -155,9 +175,9 @@
         // Function to load orders from localStorage and display them
         function loadOrders() {
             const orders = JSON.parse(localStorage.getItem("orders")) || {};
-            for (const [dishName, quantity] of Object.entries(orders)) {
+            for (const [dishName, temp] of Object.entries(orders)) {
                 try {
-                    document.getElementById(`${dishName}-quantity`).innerText = quantity;
+                    document.getElementById(`${dishName}-quantity`).innerText = temp["quantity"] || 0;
                 }
                 catch (error) {
 
@@ -171,20 +191,41 @@
         loadOrders();
 
         function submitOrder() {
-            fetch('/placeOrder', {
+            const orders = localStorage.getItem("orders");
+            console.log("Orders to submit:", orders);
+
+            fetch('/order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: localStorage.getItem("orders")
+                body: orders
+                // body: { "orders": orders }
             })
-                .then(response => response.json())
-                //responses of pattern {'orderID':1234}
-                .then(data => (data['orderID']))
-                .then(orderID => window.location = `/viewOrder/${orderID}`)
-                .catch(error => console.error('Error:', error));
+                .then(response => {
+                    console.log("here 1");
+                    if (!response.ok) throw new Error("Failed to place order");
+                    return response.text();
+                })
+                .then(data => {
+                    console.log("Order placed successfully:", data);
+                   
+                    
+                    const orderID = data;
+                    
+                    // Redirect to view order page
+                    console.log(orderID);
+                    window.location.href = `/viewOrder/${orderID}`;
+                    
 
+                    
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Error placing the order. Please try again.");
+                });
         }
+
 
     </script>
 
